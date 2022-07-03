@@ -84,6 +84,8 @@ function answer(selection) {
   console.log('selectedQuestionNumber is', selectedQuestionNumber); // Wir logen die Variable aus
   console.log('The right answer from the qurrent Question is', question['right_answer']); // Wir logen die nullte richtige Antwort aus
 
+  let idOfRightAnswer = `answer_${question['right_answer']}`;
+
   if (selectedQuestionNumber == question['right_answer']) {
     // Wenn der letzter Zahl von selectedQuestionNumber entspricht die richtige Antwort nummer:
     console.log('Right Answer!'); // Richtige Antwort
@@ -91,5 +93,6 @@ function answer(selection) {
   } else {
     console.log('Wrong Answer!'); // Flasche Antwort
     document.getElementById(selection).parentNode.classList.add('bg-danger');
+    document.getElementById(idOfRightAnswer).parentNode.classList.add('bg-success');
   }
 }
