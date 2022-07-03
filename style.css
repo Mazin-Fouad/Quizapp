@@ -1,0 +1,35 @@
+body {
+  background: #f7f7f7 !important;
+  min-height: 100vh;
+}
+
+.card-container {
+  min-height: 100vh;
+  background: #f7f7f7 !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.quiz-card {
+  width: 25rem;
+}
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff !important;
+}
+
+.navbar-brand {
+  color: #ffffff !important;
+  cursor: pointer;
+}
+
+.quiz-answer {
+  transition: background-color 0.3s ease-in-out;
+}
+
+.quiz-answer:hover {
+  cursor: pointer;
+  background: #e1e1e1;
+}

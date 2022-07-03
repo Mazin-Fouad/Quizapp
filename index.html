@@ -4,10 +4,46 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css" />
     <title>Quizapp</title>
   </head>
-  <body>
-    <script src="/script.js"></script>
+  <body onload="init()">
+    <nav class="navbar bg-dark">
+      <div class="container-fluid">
+        <span class="navbar-brand mb-0 h1">QuizApp</span>
+      </div>
+    </nav>
+    <div class="card-container">
+      <div class="card" style="width: 25rem">
+        <img src="./imgs/quiz-0.jpg" class="card-img-top" />
+        <div class="card-body">
+          <h5 class="card-title" id="question-text">Question</h5>
+
+          <div class="card quiz-answer mb-2" onclick="answer('answer From HTML1')">
+            <div class="card-body" id="answer-1">Answer</div>
+          </div>
+
+          <div class="card quiz-answer mb-2" onclick="answer('answer From HTML2')">
+            <div class="card-body" id="answer-2">Answer</div>
+          </div>
+
+          <div class="card quiz-answer mb-2" onclick="answer('answer3 From HTML3')">
+            <div class="card-body" id="answer-3">Answer</div>
+          </div>
+
+          <div class="card quiz-answer mb-2" onclick="answer('answer4 From HTML4')">
+            <div class="card-body" id="answer-4">Answer</div>
+          </div>
+        </div>
+
+        <div class="card-footer">
+          <span><b>1</b> From <b id="all-questions">6</b> Questions</span>
+          <button type="button" class="btn btn-dark">Next Question</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="./script.js"></script>
   </body>
 </html>
