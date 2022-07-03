@@ -71,22 +71,25 @@ function init() {
 function showQuestion() {
   let question = questions[currentQuestion];
   document.getElementById('question-text').innerHTML = question['question'];
-  document.getElementById('answer-1').innerHTML = question['answer_1'];
-  document.getElementById('answer-2').innerHTML = question['answer_2'];
-  document.getElementById('answer-3').innerHTML = question['answer_3'];
-  document.getElementById('answer-4').innerHTML = question['answer_4'];
+  document.getElementById('answer_1').innerHTML = question['answer_1'];
+  document.getElementById('answer_2').innerHTML = question['answer_2'];
+  document.getElementById('answer_3').innerHTML = question['answer_3'];
+  document.getElementById('answer_4').innerHTML = question['answer_4'];
 }
 
 function answer(selection) {
-  let question = questions[currentQuestion];
-  console.log('The selected Answer is from', selection);
-  let selectedQuestionNumber = selection.slice(-1);
-  console.log('selectedQuestionNumber is', selectedQuestionNumber);
-  console.log('Current Question is', question['right_answer']);
+  let question = questions[currentQuestion]; // Wir hollen das nullte Elementen Block von Json Array raus
+  console.log('The selected Answer is', selection); // Wir logen die selection Variable aus
+  let selectedQuestionNumber = selection.slice(-1); // Wir hollen das letzt Buchstabe bzw. Zahl von Selection Varialbe raus
+  console.log('selectedQuestionNumber is', selectedQuestionNumber); // Wir logen die Variable aus
+  console.log('The right answer from the qurrent Question is', question['right_answer']); // Wir logen die nullte richtige Antwort aus
 
   if (selectedQuestionNumber == question['right_answer']) {
-    console.log('Right Answer');
+    // Wenn der letzter Zahl von selectedQuestionNumber entspricht die richtige Antwort nummer:
+    console.log('Right Answer!'); // Richtige Antwort
+    document.getElementById(selection).parentNode.classList.add('bg-success');
   } else {
-    console.log('Wrong Answer!');
+    console.log('Wrong Answer!'); // Flasche Antwort
+    document.getElementById(selection).parentNode.classList.add('bg-danger');
   }
 }

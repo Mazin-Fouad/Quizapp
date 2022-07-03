@@ -33,3 +33,8 @@ body {
   cursor: pointer;
   background: #e1e1e1;
 }
+
+.bg-success,
+.bg-danger {
+  color: white;
+}
