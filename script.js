@@ -56,8 +56,8 @@ let questions = [
 let currentQuestion = 0;
 
 /**
- * function init() ist für Initialisieren der App, Fragenzähler bekommen Json Array Länge.
- * Diese Function ruft die showQuestion();
+ * Diese Funktion ist für Initialisieren der App, Fragenzähler bekommen Json Array Länge.
+ * Die Funktion ruft auch die showQuestion(); auf.
  */
 function init() {
   document.getElementById('all-questions').innerHTML = questions.length;
@@ -78,13 +78,13 @@ function showQuestion() {
 }
 
 function answer(selection) {
-  let question = questions[currentQuestion]; // Wir hollen das nullte Elementen Block von Json Array raus
+  let question = questions[currentQuestion]; // Wir hollen die nullten Elementen Block von Json Array raus.
   console.log('The selected Answer is', selection); // Wir logen die selection Variable aus
-  let selectedQuestionNumber = selection.slice(-1); // Wir hollen das letzt Buchstabe bzw. Zahl von Selection Varialbe raus
-  console.log('selectedQuestionNumber is', selectedQuestionNumber); // Wir logen die Variable aus
+  let selectedQuestionNumber = selection.slice(-1); // Wir hollen das letzt Buchstabe bzw. Zahl von Selection Variable raus
+  console.log('The las character of Seclection is', selectedQuestionNumber); // Wir logen die Variable aus
   console.log('The right answer from the qurrent Question is', question['right_answer']); // Wir logen die nullte richtige Antwort aus
 
-  let idOfRightAnswer = `answer_${question['right_answer']}`;
+  let idOfRightAnswer = `answer_${question['right_answer']}`; // Mit dieser Variable holen wir den Wert für die richtige Antwort raus und packen wir mit der ID von der richtigen Antwort von HTML.
 
   if (selectedQuestionNumber == question['right_answer']) {
     // Wenn der letzter Zahl von selectedQuestionNumber entspricht die richtige Antwort nummer:
@@ -95,4 +95,5 @@ function answer(selection) {
     document.getElementById(selection).parentNode.classList.add('bg-danger');
     document.getElementById(idOfRightAnswer).parentNode.classList.add('bg-success');
   }
+  document.getElementById('next-btn').disabled = false;
 }
