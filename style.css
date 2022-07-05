@@ -38,3 +38,24 @@ body {
 .bg-danger {
   color: white;
 }
+
+#end-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#end-screen img {
+  width: 100px;
+  margin-bottom: 10px;
+}
+
+.scrore {
+  margin-bottom: 10px;
+}
+
+.scrore span {
+  color: #edbd2f;
+  font-weight: bold;
+  margin-right: 10px;
+}
