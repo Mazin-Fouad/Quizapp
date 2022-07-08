@@ -6,27 +6,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./style.css" />
     <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <!-- Share Button -->
+    <script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=62c4356c6e3eb20012baf9b3&product=inline-share-buttons" async="async"></script>
+    <!-- Share Button -->
     <title>Quizapp</title>
   </head>
   <body onload="init()">
-    <nav class="navbar bg-dark">
-      <div class="container-fluid">
-        <span class="navbar-brand mb-0 h1">QuizApp</span>
-      </div>
-    </nav>
     <div class="card-container">
-      <div class="card" style="width: 30rem">
-        <img src="/imgs/quiz-0.jpg" class="card-img-top" />
+      <nav class="nav flex-column bg-dark" style="width: 8rem; height: 497px">
+        <img src="./imgs/logo.png" alt="" class="nav-image" />
+        <a class="nav-link" href="#">Football</a>
+        <a class="nav-link" href="#">Basketball</a>
+        <a class="nav-link" href="#">Handball</a>
+      </nav>
+      <div class="card" style="width: 30rem; height: 500px">
+        <div class="progress" id="progress">
+          <div class="progress-bar" id="progress-bar" role="progressbar" style="width: 0">25%</div>
+        </div>
+
+        <div class="card" id="welcome-message" style="display: none">
+          <div class="card-body welcome-text-container">
+            <h5>Welcom to</h5>
+            <h5>The Awsome Sport Challenge</h5>
+            <p>Reday to Challenge?</p>
+
+            <button class="start-btn" onclick="startShowQuestion()">Start Now</button>
+          </div>
+        </div>
 
         <div class="card-body" id="end-screen" style="display: none">
           <img src="./imgs/brain result.png" />
           <h3>Quiz Completed</h3>
           <div class="scrore">
-            <span>Youre Score</span>
+            <span>Your Score</span>
             <b id="amount-of-right-answers">xxx</b><b>/</b><b id="amount-of-questions">xxx</b>
           </div>
-          <button type="button" class="btn btn-primary">Share</button>
-          <a href="#">Replay</a>
+          <!-- <button type="button" class="btn btn-primary">Share</button> -->
+          <div class="sharethis-inline-share-buttons"></div>
+          <a href="#" onclick="restartGame()">Replay</a>
         </div>
 
         <div class="card-body" id="question-body">
@@ -50,7 +67,7 @@
         </div>
 
         <div class="card-footer" id="question-footer">
-          <span><b id="question-counter">1</b> From <b id="all-questions">6</b> Questions</span>
+          <span><b id="question-counter">1</b> From <b id="all-questions">xxx</b> Questions</span>
           <span>
             <button onclick="showNextQuetion()" id="next-btn" class="btn btn-dark" disabled>Next</button>
           </span>
