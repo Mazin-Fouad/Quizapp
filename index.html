@@ -6,6 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./style.css" />
     <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet" />
+    <!-- Google Fonts -->
     <!-- Share Button -->
     <script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=62c4356c6e3eb20012baf9b3&product=inline-share-buttons" async="async"></script>
     <!-- Share Button -->
@@ -26,9 +33,9 @@
 
         <div class="card" id="welcome-message" style="display: none">
           <div class="card-body welcome-text-container">
-            <h5>Welcom to</h5>
-            <h5>The Awsome Sport Challenge</h5>
-            <p>Reday to Challenge?</p>
+            <h5 class="center-text">Welcom to</h5>
+            <h5 class="center-text">The Awsome Sport Challenge</h5>
+            <p class="center-text">Reday to Challenge?</p>
 
             <button class="start-btn" onclick="startShowQuestion()">Start Now</button>
           </div>
@@ -41,7 +48,6 @@
             <span>Your Score</span>
             <b id="amount-of-right-answers">xxx</b><b>/</b><b id="amount-of-questions">xxx</b>
           </div>
-          <!-- <button type="button" class="btn btn-primary">Share</button> -->
           <div class="sharethis-inline-share-buttons"></div>
           <a href="#" onclick="restartGame()">Replay</a>
         </div>

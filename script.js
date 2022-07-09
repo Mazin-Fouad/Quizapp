@@ -40,7 +40,7 @@ let questions = [
     answer_2: '6',
     answer_3: '7',
     answer_4: '8',
-    right_answer: 2,
+    right_answer: 3,
   },
 
   {
@@ -60,7 +60,7 @@ let audioWrong = new Audio('sound_effects/wrong.mp3');
 let audioApplaus = new Audio('sound_effects/applaus.mp3');
 
 /**
- * - Die Funktion startet die App, hier wird Start Screen angezeigt.
+ * Start running the App
  */
 function init() {
   document.getElementById('question-body').style = 'display: none';
@@ -70,9 +70,7 @@ function init() {
 }
 
 /**
- * - Die Funktion verschwindet Start Screen und zeigt dafür die erste Frage,
- * wenn auf das Start Button auf dem Start Screen angcklickt wird.
- * - Anschliessend die Funktion ruft showQuestion(); auf.
+ * Delete Start Scrren and show Quetion Body.
  */
 function startShowQuestion() {
   document.getElementById('welcome-message').style = 'display: none';
@@ -83,11 +81,10 @@ function startShowQuestion() {
 }
 
 /**
- * - Die Funktion sorgt zum verteilen von Fragen und Antworten von Json Array auf die gewünschten HTML Elemente.
- * - Die Funktion sogrt auch für Anzeigen von Endscreen wenn alle Fragen beantwortet.
+ * Show next Question or End Screen
  */
 function showQuestion() {
-  if (currentQuestion >= questions.length) {
+  if (gameIsOver()) {
     showEndScreen();
   } else {
     progressBar();
@@ -95,20 +92,22 @@ function showQuestion() {
   }
 }
 
+function gameIsOver() {
+  return currentQuestion >= questions.length;
+}
+
 /**
- * * - Die Funktion ist für Progressbar zuständig umd wird bei von showQuestion(); aufgerufen.
+ * Dynamic Progreesbar, function called from showQuestion().
  */
 function progressBar() {
   let percent = (currentQuestion + 1) / questions.length;
-  percent = Math.round(percent * 100); // Runden Methode.
-  console.log('Fortschrit:', percent);
+  percent = Math.round(percent * 100);
   document.getElementById('progress-bar').innerHTML = `${percent}%`;
   document.getElementById('progress-bar').style = `width: ${percent}%`;
 }
 
 /**
- * - Zeile 108: Anzahl von gesmat Fragen bekommen die Array Länge [6]
- * - Zeile 109: Anzahl von gesamt richtige Antworten fängt bei 0 an (Siehe Zeile 57)
+ * End Screen will be showed, function called from showQuestion()
  */
 function showEndScreen() {
   document.getElementById('question-body').style = 'display: none';
@@ -116,13 +115,21 @@ function showEndScreen() {
   document.getElementById('end-screen').style = '';
   document.getElementById('amount-of-questions').innerHTML = questions.length;
   document.getElementById('amount-of-right-answers').innerHTML = rightQuestions;
+  playApplausSound();
+}
+
+/**
+ * If all questions are correctly answerd, applause sound will play.
+ * Function called from showEndScreen();
+ */
+function playApplausSound() {
   if (rightQuestions === questions.length) {
     audioApplaus.play();
   }
 }
 
 /**
- * - let question = questions[currentQuestion]; = wir rufen den ersten Block von dem Json Array (Siehe Zeile 56).
+ * Quiz Screen will be showed, function called from showQuestion().
  */
 function showQuizScreen() {
   let question = questions[currentQuestion];
@@ -136,94 +143,77 @@ function showQuizScreen() {
 }
 
 /**
- * - Diese Funktion sorgt für Antwort Felder Grün/ Rot zu markieren.
- * - Die Funktion ruft getNextButtonEnabled();
+ * If the answer is correct, answer field will marked in green
+ * if the answer is wrong, answer field will marked in red + right field in green
  */
 function answer(selection) {
-  let question = questions[currentQuestion]; // Wir hollen die nullten Elementen Block von Json Array raus.
-  let selectedQuestionNumber = selection.slice(-1); // Wir hollen das letzt Buchstabe bzw. Zahl von selection Variable raus
-  let idOfRightAnswer = `answer_${question['right_answer']}`; // Mit dieser Variable holen wir den Wert für die richtige Antwort raus und packen wir mit der ID von der richtigen Antwort von HTML.
-  if (selectedQuestionNumber == question['right_answer']) {
-    // Szenarion richtige Antwort
-    // Wenn der letzter Zahl von selectedQuestionNumber entspricht die richtige Antwort nummer
-    document.getElementById(selection).parentNode.classList.add('bg-success');
-    audioSucces.play();
-    rightQuestions++; // Zähler für richtige Antwort wird um 1 erhöht.
+  let question = questions[currentQuestion];
+  let selectedQuestionNumber = selection.slice(-1);
+  if (answerIsCorrect(selectedQuestionNumber, question)) {
+    rightAnswer(selection);
   } else {
-    // Szenario falsche Antwort
-    document.getElementById(selection).parentNode.classList.add('bg-danger');
-    document.getElementById(idOfRightAnswer).parentNode.classList.add('bg-success');
-    audioWrong.play();
+    wrongAnswer(selection);
   }
   getNextButtonEnabled();
 }
 
-/**
- * Die Funktion sorgt für Next btn anklickbar sei, nach dem Antworten.
- */
+function answerIsCorrect(selectedQuestionNumber, question) {
+  return selectedQuestionNumber == question['right_answer'];
+}
+
+function rightAnswer(selection) {
+  document.getElementById(selection).parentNode.classList.add('bg-success');
+  audioSucces.play();
+  rightQuestions++;
+}
+
+function wrongAnswer(selection) {
+  let question = questions[currentQuestion];
+  let idOfRightAnswer = `answer_${question['right_answer']}`;
+  document.getElementById(selection).parentNode.classList.add('bg-danger');
+  document.getElementById(idOfRightAnswer).parentNode.classList.add('bg-success');
+  audioWrong.play();
+}
+
 function getNextButtonEnabled() {
   document.getElementById('next-btn').disabled = false;
 }
 
 /**
- * Die Funktion sorgt dafür, die nächste Frage anzuzeigen.
- * Die Funktion ruft resetAnswersFields(); auf
- * Die Funktion aktualisiert showQuestion();, sprich nächste Frage wird an gezeigt.
+ * To show the next quetions after answer the previous one
  */
 function showNextQuetion() {
-  currentQuestion++; //  Die Variable wird um 1 erhöht
-  document.getElementById('next-btn').disabled = true; // Next btn wieder nicht ancklickbar.
-  resetAnswersFields(); // Die Funktion wird aufgerufen um alle Antwort Markierungen werden entfernt.
-  showQuestion(); // Die funktion wird aufgerufen zum HTML aktualisieren, sprich nächste Frage anzeigen.
+  currentQuestion++;
+  document.getElementById('next-btn').disabled = true;
+  resetAnswersFields();
+  showQuestion();
 }
 
 /**
- * - Die Funktion restet all Antwortfelder beim neue Fragen Anzeigen
+ * All Anwers fields will be reset after click of Next btn.
  */
 function resetAnswersFields() {
-  document.getElementById('answer_1').parentNode.classList.remove('bg-danger');
+  resetGreenFields();
+  resetReedFields();
+}
+
+function resetGreenFields() {
   document.getElementById('answer_1').parentNode.classList.remove('bg-success');
-  document.getElementById('answer_2').parentNode.classList.remove('bg-danger');
   document.getElementById('answer_2').parentNode.classList.remove('bg-success');
-  document.getElementById('answer_3').parentNode.classList.remove('bg-danger');
   document.getElementById('answer_3').parentNode.classList.remove('bg-success');
-  document.getElementById('answer_4').parentNode.classList.remove('bg-danger');
   document.getElementById('answer_4').parentNode.classList.remove('bg-success');
 }
 
-/**
- * - Die Funktion ist für App zu Wiederholen.
- * - Die Variablen currentQuestion und rightQuestions werden auf 0 züruckgesetzt.
- * - Die Funktion init(); wird aufgerufen um Start Screen anzuzeigen.
- */
+function resetReedFields() {
+  document.getElementById('answer_1').parentNode.classList.remove('bg-danger');
+  document.getElementById('answer_2').parentNode.classList.remove('bg-danger');
+  document.getElementById('answer_3').parentNode.classList.remove('bg-danger');
+  document.getElementById('answer_4').parentNode.classList.remove('bg-danger');
+}
+
 function restartGame() {
   document.getElementById('end-screen').style = 'display: none';
   currentQuestion = 0;
   rightQuestions = 0;
   init();
 }
-
-/**************************************************************************************************************************/
-/* function answer(selection) {
-  let question = questions[currentQuestion]; // Wir hollen die nullten Elementen Block von Json Array raus.
-
-  console.log('The selected Answer is', selection); // Wir logen den wert der auwgewählte Antwort aus.
-
-  let selectedQuestionNumber = selection.slice(-1); // Wir hollen das letzt Buchstabe bzw. Zahl von Selection Variable raus
-
-  console.log('The las character of Seclection is', selectedQuestionNumber); // Wir logen die Variable aus
-  console.log('The right answer from the qurrent Question is', question['right_answer']); // Wir logen die nullte richtige Antwort aus
-
-  let idOfRightAnswer = `answer_${question['right_answer']}`; // Mit dieser Variable holen wir den Wert für die richtige Antwort raus und    packen wir mit der ID von der richtigen Antwort von HTML.
-
-  if (selectedQuestionNumber == question['right_answer']) {
-    // Wenn der letzter Zahl von selectedQuestionNumber entspricht die richtige Antwort nummer:
-    console.log('Right Answer!'); // Richtige Antwort
-    document.getElementById(selection).parentNode.classList.add('bg-success');
-  } else {
-    console.log('Wrong Answer!'); // Flasche Antwort
-    document.getElementById(selection).parentNode.classList.add('bg-danger');
-    document.getElementById(idOfRightAnswer).parentNode.classList.add('bg-success');
-  }
-  document.getElementById('next-btn').disabled = false;
-} */

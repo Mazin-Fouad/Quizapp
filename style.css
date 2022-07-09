@@ -1,6 +1,7 @@
 body {
   background: #ffeccc !important;
   min-height: 100vh;
+  font-family: 'Poppins', sans-serif !important;
 }
 
 .card-container {
@@ -126,4 +127,17 @@ body {
   bottom: 10%;
   right: 10%;
   cursor: pointer;
+}
+
+.center-text {
+  text-align: center;
+}
+
+@media (min-width: 270px) and (max-width: 428px) {
+  .letter {
+    display: none;
+  }
+  .card-title {
+    font-size: 15px;
+  }
 }
