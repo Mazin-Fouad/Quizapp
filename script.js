@@ -194,7 +194,7 @@ function showNextQuetion() {
  */
 function resetAnswersFields() {
   resetGreenFields();
-  resetReedFields();
+  resetRedFields();
 }
 
 function resetGreenFields() {
