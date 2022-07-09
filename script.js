@@ -140,6 +140,7 @@ function showQuizScreen() {
   document.getElementById('answer_2').innerHTML = `<span class="letter">B</span> ${question['answer_2']}`;
   document.getElementById('answer_3').innerHTML = `<span class="letter">C</span> ${question['answer_3']}`;
   document.getElementById('answer_4').innerHTML = `<span class="letter">D</span> ${question['answer_4']}`;
+  answersFieldClickable();
 }
 
 /**
@@ -165,6 +166,7 @@ function rightAnswer(selection) {
   document.getElementById(selection).parentNode.classList.add('bg-success');
   audioSucces.play();
   rightQuestions++;
+  answersFieldUnclickable();
 }
 
 function wrongAnswer(selection) {
@@ -173,6 +175,7 @@ function wrongAnswer(selection) {
   document.getElementById(selection).parentNode.classList.add('bg-danger');
   document.getElementById(idOfRightAnswer).parentNode.classList.add('bg-success');
   audioWrong.play();
+  answersFieldUnclickable();
 }
 
 function getNextButtonEnabled() {
@@ -216,4 +219,18 @@ function restartGame() {
   currentQuestion = 0;
   rightQuestions = 0;
   init();
+}
+
+function answersFieldClickable() {
+  document.getElementById('answer-parent1').style.pointerEvents = 'auto';
+  document.getElementById('answer-parent2').style.pointerEvents = 'auto';
+  document.getElementById('answer-parent3').style.pointerEvents = 'auto';
+  document.getElementById('answer-parent4').style.pointerEvents = 'auto';
+}
+
+function answersFieldUnclickable() {
+  document.getElementById('answer-parent1').style.pointerEvents = 'none';
+  document.getElementById('answer-parent2').style.pointerEvents = 'none';
+  document.getElementById('answer-parent3').style.pointerEvents = 'none';
+  document.getElementById('answer-parent4').style.pointerEvents = 'none';
 }
