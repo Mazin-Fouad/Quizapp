@@ -204,7 +204,7 @@ function resetGreenFields() {
   document.getElementById('answer_4').parentNode.classList.remove('bg-success');
 }
 
-function resetReedFields() {
+function resetRedFields() {
   document.getElementById('answer_1').parentNode.classList.remove('bg-danger');
   document.getElementById('answer_2').parentNode.classList.remove('bg-danger');
   document.getElementById('answer_3').parentNode.classList.remove('bg-danger');
